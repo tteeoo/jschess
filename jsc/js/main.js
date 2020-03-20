@@ -13,7 +13,7 @@ var board = {
 	this.canvas.id = "main";
 	this.context = this.canvas.getContext("2d");
 	document.getElementById("chess").appendChild(this.canvas);
-	this.interval = setInterval(updateBoard(), 20);
+	this.interval = setInterval(updateBoard, 20);
     },
     draw: function() {
 	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -38,7 +38,7 @@ var board = {
 }
 
 function startGame() {
-    pawn = new piece("pawn", "black", "a", 8);
+    pawn = new piece("pawn", "white", "a", 8);
     board.start();
     
     board.canvas.addEventListener("mousedown", function(e) {
@@ -48,12 +48,14 @@ function startGame() {
 
 function updateBoard() {
     board.draw();
-    //pawn.draw();
+    pawn.draw();
 }
 
 function piece(type, color, letter, number) {
     this.type = type;
     this.color = color;
+    this.letter = letter;
+    this.number = number;
     this.image = new Image();
     if(color == "white") {
 	this.image.src = "img/w" + type + ".png";
@@ -62,7 +64,7 @@ function piece(type, color, letter, number) {
     }
     this.draw = function() {
 	ctx = board.context;
-	ctx.drawImage(this.image, ANToCoords(letter, number)[0], ANToCoords(letter, number)[1], 64, 64);
+	ctx.drawImage(this.image, ANToCoords(this.letter, this.number)[0], ANToCoords(this.letter, this.number)[1], 64, 64);
     }
 }
 
