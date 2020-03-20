@@ -38,6 +38,7 @@ var board = {
 }
 
 function startGame() {
+    pawn = new piece("pawn", "black", "a", 8);
     board.start();
     
     board.canvas.addEventListener("mousedown", function(e) {
@@ -47,95 +48,22 @@ function startGame() {
 
 function updateBoard() {
     board.draw();
+    //pawn.draw();
 }
 
-function getPlace(letter, number) {
-    var index;
-
-    switch(letter) {
-	case "a":
-	    index = 0;
-	    break;
-	case "b":
-	    index = 1;
-	    break;
-	case "c":
-	    index = 2;
-	    break;
-	case "d":
-	    index = 3;
-	    break;
-	case "e":
-	    index = 4;
-	    break;
-	case "f":
-	    index = 5;
-	    break;
-	case "g":
-	    index = 6;
-	    break;
-	case "h":
-	    index = 7;
-	    break;
-	default:
-	    index = 0;
-	    break;
-    }
-    
-    return(places[index][number - 1]);
-}
-
-function coordsToAN(x, y) {
-    var letter;
-    var number;
-
-    if(0 <= x && x < 64) {
-	letter = "a";
-    } else if (64 <= x && x < 128) {
-	letter = "b";
-    } else if (128 <= x && x < 192) {
-	letter = "c";
-    } else if (192 <= x && x < 256) {
-	letter = "d";
-    } else if (256 <= x && x < 320) {
-	letter = "e";
-    } else if (320 <= x && x < 384) {
-	letter = "f";
-    } else if (384 <= x && x < 448) {
-	letter = "g";
-    } else if (448 <= x && x < 512) {
-	letter = "h";
-    } else {
-	letter = "a";
-    }
-
-    if(0 <= y && y < 64) {
-	number = 8;
-    } else if (64 <= y && y < 128) {
-	number = 7;
-    } else if (128 <= y && y < 192) {
-	number = 6;
-    } else if (192 <= y && y < 256) {
-	number = 5;
-    } else if (256 <= y && y < 320) {
-	number = 4;
-    } else if (320 <= y && y < 384) {
-	number = 3;
-    } else if (384 <= y && y < 448) {
-	number = 2;
-    } else if (448 <= y && y < 512) {
-	number = 1;
-    } else {
-	number = 8;
-    }
-
-    return([letter, number]);
-	
-}
-
-function piece(type, color) {
+function piece(type, color, letter, number) {
     this.type = type;
     this.color = color;
+    this.image = new Image();
+    if(color == "white") {
+	this.image.src = "img/w" + type + ".png";
+    } else {
+	this.image.src = "img/" + type + ".png";
+    }
+    this.draw = function() {
+	ctx = board.context;
+	ctx.drawImage(this.image, ANToCoords(letter, number)[0], ANToCoords(letter, number)[1], 64, 64);
+    }
 }
 
 var whitePieces = [];
@@ -154,3 +82,4 @@ var places = [
 ];
 
 startGame();
+pawn.draw();
