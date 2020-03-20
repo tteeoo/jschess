@@ -1,22 +1,3 @@
-
-function startGame() {
-    var whitePieces = [];
-    var blackPieces = [];
-
-    var places = {
-	a: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	b: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	c: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	d: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	e: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	f: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	g: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	h: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""}
-    };
-
-    board.start();
-}
-
 var board = {
     canvas: document.createElement("canvas"),
     start: function() {
@@ -24,9 +5,8 @@ var board = {
 	this.canvas.height = 512;
 	this.canvas.id = "main";
 	this.context = this.canvas.getContext("2d");
-	document.getElementById("wrapper").appendChild(this.canvas);
-	this.frameNo = 0;
-	this.interval = setInterval(this.draw, 15);
+	document.getElementById("chess").appendChild(this.canvas);
+	this.interval = setInterval(updateBoard(), 20);
     },
     draw: function() {
 	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -48,6 +28,28 @@ var board = {
 	    }
 	}
     }
+}
+
+function startGame() {
+    var whitePieces = [];
+    var blackPieces = [];
+
+    var places = {
+	a: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
+	b: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
+	c: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
+	d: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
+	e: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
+	f: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
+	g: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
+	h: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""}
+    };
+
+    board.start();
+}
+
+function updateBoard() {
+    board.draw();
 }
 
 function piece(type, color, x, y) {
