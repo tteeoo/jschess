@@ -2,7 +2,12 @@ function getCursorPos(canvas, event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    console.log(coordsToAN(x, y));
+    var AN = coordsToAN(x, y);
+    var letter = AN[0];
+    var number = AN[1];
+    var place = getPlace(letter, number);
+    var piece = places[place[0]][place[1]];
+    console.log(piece);
 }
 
 var board = {

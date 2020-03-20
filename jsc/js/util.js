@@ -31,7 +31,7 @@ function getPlace(letter, number) {
 	    break;
     }
     
-    return(places[index][number - 1]);
+    return([index, number - 1]);
 }
 
 function placeToAN(letterin, numberin) {
