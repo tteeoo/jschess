@@ -68,19 +68,6 @@ function piece(type, color, letter, number) {
     }
 }
 
-var pieces = [[], []];
-var places = [
-	//   1      2    3   4   5   6     7      8
-    /*a*/ ["wro", "wpa", "", "", "", "", "bpa", "bro"],
-    /*b*/ ["wkn", "wpa", "", "", "", "", "bpa", "bkn"],
-    /*c*/ ["wbi", "wpa", "", "", "", "", "bpa", "bbi"],
-    /*d*/ ["wqu", "wpa", "", "", "", "", "bpa", "bqu"],
-    /*e*/ ["wki", "wpa", "", "", "", "", "bpa", "bki"],
-    /*f*/ ["wbi", "wpa", "", "", "", "", "bpa", "bbi"],
-    /*g*/ ["wkn", "wpa", "", "", "", "", "bpa", "bkn"],
-    /*h*/ ["wro", "wpa", "", "", "", "", "bpa", "bro"]
-];
-
 function materialize(places) {
     var whitePieces = [];
     var blackPieces = [];
@@ -154,5 +141,18 @@ function drawPieces() {
 	pieces[1][i].draw();
     }
 }
+
+var pieces = [[], []];
+var places = [
+	//   1      2    3   4   5   6     7      8
+    /*a*/ ["wro", "wpa", "", "", "", "", "bpa", "bro"],
+    /*b*/ ["wkn", "wpa", "", "", "", "", "bpa", "bkn"],
+    /*c*/ ["wbi", "wpa", "", "", "", "", "bpa", "bbi"],
+    /*d*/ ["wqu", "wpa", "", "", "", "", "bpa", "bqu"],
+    /*e*/ ["wki", "wpa", "", "", "", "", "bpa", "bki"],
+    /*f*/ ["wbi", "wpa", "", "", "", "", "bpa", "bbi"],
+    /*g*/ ["wkn", "wpa", "", "", "", "", "bpa", "bkn"],
+    /*h*/ ["wro", "wpa", "", "", "", "", "bpa", "bro"]
+];
 
 startGame();
