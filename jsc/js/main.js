@@ -1,3 +1,10 @@
+function getCursorPos(canvas, event) {
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    console.log(coordsToAN(x, y));
+}
+
 var board = {
     canvas: document.createElement("canvas"),
     start: function() {
@@ -46,10 +53,62 @@ function startGame() {
     };
 
     board.start();
+    
+    board.canvas.addEventListener("mousedown", function(e) {
+	getCursorPos(board.canvas, e)
+    });
 }
 
 function updateBoard() {
     board.draw();
+}
+
+function coordsToAN(x, y) {
+    var letter;
+    var number;
+
+    if(0 <= x && x < 64) {
+	letter = "a";
+    } else if (64 <= x && x < 128) {
+	letter = "b";
+    } else if (128 <= x && x < 192) {
+	letter = "c";
+    } else if (192 <= x && x < 256) {
+	letter = "d";
+    } else if (256 <= x && x < 320) {
+	letter = "e";
+    } else if (320 <= x && x < 384) {
+	letter = "f";
+    } else if (384 <= x && x < 448) {
+	letter = "g";
+    } else if (448 <= x && x < 512) {
+	letter = "h";
+    } else {
+	letter = "a";
+    }
+
+    if(0 <= y && y < 64) {
+	number = 8;
+    } else if (64 <= y && y < 128) {
+	number = 7;
+    } else if (128 <= y && y < 192) {
+	number = 6;
+    } else if (192 <= y && y < 256) {
+	number = 5;
+    } else if (256 <= y && y < 320) {
+	number = 4;
+    } else if (320 <= y && y < 384) {
+	number = 3;
+    } else if (384 <= y && y < 448) {
+	number = 2;
+    } else if (448 <= y && y < 512) {
+	number = 1;
+    } else {
+	number = 8;
+    }
+
+    return([letter, number]);
+	
 }
 
 function piece(type, color, x, y) {
