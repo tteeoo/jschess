@@ -38,7 +38,6 @@ var board = {
 }
 
 function startGame() {
-    pawn = new piece("pawn", "white", "a", 8);
     board.start();
     
     board.canvas.addEventListener("mousedown", function(e) {
@@ -47,8 +46,9 @@ function startGame() {
 }
 
 function updateBoard() {
+    pieces = materialize(places);
     board.draw();
-    pawn.draw();
+    drawPieces();
 }
 
 function piece(type, color, letter, number) {
@@ -68,20 +68,91 @@ function piece(type, color, letter, number) {
     }
 }
 
-var whitePieces = [];
-var blackPieces = [];
-
+var pieces = [[], []];
 var places = [
-	// 1   2   3   4   5   6   7   8
-    /*a*/ ["", "", "", "", "", "", "", ""],
-    /*b*/ ["", "", "", "", "", "", "", ""],
-    /*c*/ ["", "", "", "", "", "", "", ""],
-    /*d*/ ["", "", "", "", "", "", "", ""],
-    /*e*/ ["", "", "", "", "", "", "", ""],
-    /*f*/ ["", "", "", "", "", "", "", ""],
-    /*g*/ ["", "", "", "", "", "", "", ""],
-    /*h*/ ["", "", "", "", "", "", "", ""]
+	//   1      2    3   4   5   6     7      8
+    /*a*/ ["wro", "wpa", "", "", "", "", "bpa", "bro"],
+    /*b*/ ["wkn", "wpa", "", "", "", "", "bpa", "bkn"],
+    /*c*/ ["wbi", "wpa", "", "", "", "", "bpa", "bbi"],
+    /*d*/ ["wqu", "wpa", "", "", "", "", "bpa", "bqu"],
+    /*e*/ ["wki", "wpa", "", "", "", "", "bpa", "bki"],
+    /*f*/ ["wbi", "wpa", "", "", "", "", "bpa", "bbi"],
+    /*g*/ ["wkn", "wpa", "", "", "", "", "bpa", "bkn"],
+    /*h*/ ["wro", "wpa", "", "", "", "", "bpa", "bro"]
 ];
 
+function materialize(places) {
+    var whitePieces = [];
+    var blackPieces = [];
+    var windex = 0;
+    var bindex = 0;
+
+    for(var i = 0; i < places.length; i++) {
+	for(var j = 0; j < places[i].length; j++) {
+	    switch(places[i][j]) {
+		case "wpa":
+		    whitePieces[windex] = new piece("pawn", "white", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    windex++;
+		    break;
+		case "wro":
+		    whitePieces[windex] = new piece("rook", "white", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    windex++;
+		    break;
+		case "wkn":
+		    whitePieces[windex] = new piece("knight", "white", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    windex++;
+		    break;
+		case "wbi":
+		    whitePieces[windex] = new piece("bishop", "white", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    windex++;
+		    break;
+		case "wqu":
+		    whitePieces[windex] = new piece("queen", "white", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    windex++;
+		    break;
+		case "wki":
+		    whitePieces[windex] = new piece("king", "white", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    windex++;
+		    break;
+
+		case "bpa":
+		    blackPieces[bindex] = new piece("pawn", "black", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    bindex++;
+		    break;
+		case "bro":
+		    blackPieces[bindex] = new piece("rook", "black", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    bindex++;
+		    break;
+		case "bkn":
+		    blackPieces[bindex] = new piece("knight", "black", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    bindex++;
+		    break;
+		case "bbi":
+		    blackPieces[bindex] = new piece("bishop", "black", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    bindex++;
+		    break;
+		case "bqu":
+		    blackPieces[bindex] = new piece("queen", "black", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    bindex++;
+		    break;
+		case "bki":
+		    blackPieces[bindex] = new piece("king", "black", placeToAN(i, j)[0], placeToAN(i, j)[1]);
+		    bindex++;
+		    break;
+	    }
+	}
+    }
+
+    return([whitePieces, blackPieces]);
+}
+
+function drawPieces() {
+    for(var i = 0; i < pieces[0].length; i++) {
+	pieces[0][i].draw();
+    }
+    for(var i = 0; i < pieces[1].length; i++) {
+	pieces[1][i].draw();
+    }
+}
+
 startGame();
-pawn.draw();

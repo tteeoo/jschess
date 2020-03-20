@@ -34,6 +34,42 @@ function getPlace(letter, number) {
     return(places[index][number - 1]);
 }
 
+function placeToAN(letterin, numberin) {
+    var letter;
+
+    switch(letterin) {
+	case 0:
+	    letter = "a";
+	    break;
+	case 1:
+	    letter = "b";
+	    break;
+	case 2:
+	    letter = "c";
+	    break;
+	case 3:
+	    letter = "d";
+	    break;
+	case 4:
+	    letter = "e";
+	    break;
+	case 5:
+	    letter = "f";
+	    break;
+	case 6:
+	    letter = "g";
+	    break;
+	case 7:
+	    letter = "h";
+	    break;
+	default:
+	    letter = "a";
+	    break;
+    }
+    
+    return([letter, numberin + 1]);
+}
+
 function coordsToAN(x, y) {
     var letter;
     var number;
