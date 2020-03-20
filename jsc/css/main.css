@@ -1,3 +1,7 @@
+body {
+    background-color: #eee;
+}
+
 #chess {
     height: 512px;
     width: 512px;
