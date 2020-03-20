@@ -27,9 +27,9 @@ var board = {
 	    for(const j of Array(8).keys()) {
 		co++;
 		if(co % 2 == 0) {
-		    this.context.fillStyle = "grey";
+		    this.context.fillStyle = "#FEFEC8";
 		} else {
-		    this.context.fillStyle = "brown";
+		    this.context.fillStyle = "#8E5A44";
 		}
 		this.context.fillRect(i * 64, j * 64, 64, 64);
 	    }
@@ -38,20 +38,6 @@ var board = {
 }
 
 function startGame() {
-    var whitePieces = [];
-    var blackPieces = [];
-
-    var places = {
-	a: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	b: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	c: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	d: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	e: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	f: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	g: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""},
-	h: {"one": "", "two": "", "thr": "", "fou": "", "fiv": "", "six": "", "sev": "", "eig": ""}
-    };
-
     board.start();
     
     board.canvas.addEventListener("mousedown", function(e) {
@@ -61,6 +47,42 @@ function startGame() {
 
 function updateBoard() {
     board.draw();
+}
+
+function getPlace(letter, number) {
+    var index;
+
+    switch(letter) {
+	case "a":
+	    index = 0;
+	    break;
+	case "b":
+	    index = 1;
+	    break;
+	case "c":
+	    index = 2;
+	    break;
+	case "d":
+	    index = 3;
+	    break;
+	case "e":
+	    index = 4;
+	    break;
+	case "f":
+	    index = 5;
+	    break;
+	case "g":
+	    index = 6;
+	    break;
+	case "h":
+	    index = 7;
+	    break;
+	default:
+	    index = 0;
+	    break;
+    }
+    
+    return(places[index][number - 1]);
 }
 
 function coordsToAN(x, y) {
@@ -111,10 +133,24 @@ function coordsToAN(x, y) {
 	
 }
 
-function piece(type, color, x, y) {
+function piece(type, color) {
     this.type = type;
-    this.x = x;
-    this.y = y;
+    this.color = color;
 }
+
+var whitePieces = [];
+var blackPieces = [];
+
+var places = [
+	// 1   2   3   4   5   6   7   8
+    /*a*/ ["", "", "", "", "", "", "", ""],
+    /*b*/ ["", "", "", "", "", "", "", ""],
+    /*c*/ ["", "", "", "", "", "", "", ""],
+    /*d*/ ["", "", "", "", "", "", "", ""],
+    /*e*/ ["", "", "", "", "", "", "", ""],
+    /*f*/ ["", "", "", "", "", "", "", ""],
+    /*g*/ ["", "", "", "", "", "", "", ""],
+    /*h*/ ["", "", "", "", "", "", "", ""]
+];
 
 startGame();

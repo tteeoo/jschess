@@ -1,8 +1,11 @@
-#main {
+#chess {
+    height: 512px;
+    width: 512px;
+    border: 4px black solid;
 }
 
 #wrapper {
     margin: auto;
     height: 100%;
-    width: 512px;
+    width: 40%;
 }
