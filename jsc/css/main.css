@@ -1,5 +1,6 @@
 body {
     background-color: #eee;
+    font-family: abeezee;
 }
 
 #chess {
@@ -9,7 +10,16 @@ body {
 }
 
 #wrapper {
+    width: 512px;
     margin: auto;
-    height: 100%;
-    width: 40%;
+}
+
+@font-face {
+  font-family: abeezee;
+  src: url(../font/ABeeZee-Regular.ttf);
+}
+
+@font-face {
+  font-family: abeezee-i;
+  src: url(../font/ABeeZee-Italic.ttf);
 }
