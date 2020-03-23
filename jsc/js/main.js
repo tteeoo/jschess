@@ -175,7 +175,7 @@ function updateSelection() {
     var text = document.getElementById("selected");
     try {
 	var AN = placeToAN(selected[0], selected[1]);
-	text.innerHTML = " | " + AN[0] + " " + AN[1] + ": " + places[selected[0]][selected[1]];	
+	text.innerHTML = " | " + AN[0] + AN[1] + ": " + places[selected[0]][selected[1]];	
     } catch(err) {
 	text.innerHTML = " | None selected";
     }
