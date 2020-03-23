@@ -17,7 +17,8 @@ function getCursorPos(canvas, event) {
 	}
 
 	if(newSelected[0] == selected[0] && newSelected[1] == selected[1]) {
-	    selected = [];	    
+	    selected = [];
+	    newSelected = [];
 	}
     }
 }
