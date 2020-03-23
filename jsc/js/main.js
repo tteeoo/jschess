@@ -64,9 +64,9 @@ function startGame() {
 
 function updateBoard() {
     updateTurn();
-    updateSelection();
     pieces = materialize(places);
     board.draw();
+    updateSelection();
     drawPieces();
 }
 
@@ -178,6 +178,15 @@ function updateSelection() {
 	text.innerHTML = " | " + AN[0] + AN[1] + ": " + places[selected[0]][selected[1]];	
     } catch(err) {
 	text.innerHTML = " | None selected";
+    }
+    var ctx = board.context;
+    ctx.fillStyle = "#98F5FF";
+    for(const i of Array(64).keys()) {
+	for(const j of Array(8).keys()) {
+	    if(j == 7 - selected[1] && i == selected[0]) {
+		ctx.fillRect(i * 64, j * 64, 64, 64);
+	    }
+	}
     }
 }
 
