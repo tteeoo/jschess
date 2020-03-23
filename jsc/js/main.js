@@ -7,7 +7,19 @@ function getCursorPos(canvas, event) {
     var number = AN[1];
     var place = getPlace(letter, number);
     var piece = places[place[0]][place[1]];
-    console.log(piece);
+    if(piece != "") {
+	if(selected.length == 0) {
+	    if(piece[0] == turn[0]) {
+		selected = [place[0], place[1]];
+	    }
+	} else {
+	    newSelected = [place[0], place[1]];
+	}
+
+	if(newSelected[0] == selected[0] && newSelected[1] == selected[1]) {
+	    selected = [];	    
+	}
+    }
 }
 
 var board = {
@@ -51,6 +63,8 @@ function startGame() {
 }
 
 function updateBoard() {
+    updateTurn();
+    updateSelection();
     pieces = materialize(places);
     board.draw();
     drawPieces();
@@ -147,7 +161,30 @@ function drawPieces() {
     }
 }
 
+function updateTurn() {
+    var text = document.getElementById("turn");
+    if(turn == "white") {
+	text.innerHTML = "White's turn";	
+    }
+    if(turn == "black") {
+	text.innerHTML = "Black's turn";	
+    }
+}
+
+function updateSelection() {
+    var text = document.getElementById("selected");
+    try {
+	var AN = placeToAN(selected[0], selected[1]);
+	text.innerHTML = " | " + AN[0] + " " + AN[1] + ": " + places[selected[0]][selected[1]];	
+    } catch(err) {
+	text.innerHTML = " | None selected";
+    }
+}
+
+var turn = "white";
 var pieces = [[], []];
+var selected = [];
+var newSelected = [];
 var places = [
 	//   1      2    3   4   5   6     7      8
     /*a*/ ["wro", "wpa", "", "", "", "", "bpa", "bro"],
