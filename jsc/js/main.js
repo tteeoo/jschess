@@ -1,3 +1,15 @@
+/* JSChess by Theo Henson (GH: tteeoo/jschess)
+ *
+ * TODO:
+ * - Movement
+ * - Turn switching
+ * - Move verification and highlighting
+ * - Optimization
+ * - Expand HTML
+ *
+ */
+
+
 function getCursorPos(canvas, event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -216,7 +228,7 @@ function checkKing() {
 }
 
 // make
-function calculateGoodMoves(name) {
+function calculateGoodMoves(name, x, y) {
     var good_moves = [];
     
     switch(name) {
