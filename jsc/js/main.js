@@ -57,13 +57,13 @@ var board = {
 
 function startGame() {
     board.start();
-    
     board.canvas.addEventListener("mousedown", function(e) {
 	getCursorPos(board.canvas, e)
     });
 }
 
 function updateBoard() {
+    checkKing();
     updateTurn();
     pieces = materialize(places);
     board.draw();
@@ -188,6 +188,38 @@ function updateSelection() {
 		ctx.fillRect(i * 64, j * 64, 64, 64);
 	    }
 	}
+    }
+}
+
+function checkKing() {
+    var blackKing = false;
+    var whiteKing = false;
+    for(column in places) {
+	for(item in places[column]) {
+	    if(places[column][item] == "wki") {
+		whiteKing = true;
+	    }
+	    if(places[column][item] == "bki") {
+		blackKing = true;
+	    }
+	}
+    }
+
+    if(!blackKing) {
+	alert("Checkmate! White has won.");
+	location.reload();
+    }
+    if(!whiteKing) {
+	alert("Checkmate! Black has won.");
+	location.reload();
+    }
+}
+
+// make
+function calculateGoodMoves(name) {
+    var good_moves = [];
+    
+    switch(name) {
     }
 }
 
