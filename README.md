@@ -1,6 +1,13 @@
 # jschess
 Chess in javascript
 
-<hr>
+#### This is almost done, I just need to add a few features:
 
-This is almost done, I just need to add move verifcation.
+- Basic move verification
+- Highlighting valid moves
+- Pawn promotion
+- More advanced move verification:
+    - En passant
+    - Castling
+    - Not allowing the king to be moved in to checkmate
+- Further stylize the web page

@@ -1,11 +1,4 @@
-/* JSChess by Theo Henson (GH: tteeoo/jschess)
- *
- * TODO:
- * - Move verification and highlighting
- * - Optimization
- * - Expand HTML
- *
- */
+// JSChess by Theo Henson (GH: tteeoo/jschess)
 
 function onBoardClick(canvas, event) {
     const rect = canvas.getBoundingClientRect();
