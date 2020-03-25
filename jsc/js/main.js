@@ -1,16 +1,13 @@
 /* JSChess by Theo Henson (GH: tteeoo/jschess)
  *
  * TODO:
- * - Movement
- * - Turn switching
  * - Move verification and highlighting
  * - Optimization
  * - Expand HTML
  *
  */
 
-
-function getCursorPos(canvas, event) {
+function onBoardClick(canvas, event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -19,20 +16,31 @@ function getCursorPos(canvas, event) {
     var number = AN[1];
     var place = getPlace(letter, number);
     var piece = places[place[0]][place[1]];
-    if(piece != "") {
-	if(selected.length == 0) {
-	    if(piece[0] == turn[0]) {
-		selected = [place[0], place[1]];
-	    }
-	} else {
-	    newSelected = [place[0], place[1]];
-	}
+    if(piece[0] == turn[0]) {
+		if(selected.length == 0) {
+			selected = [place[0], place[1]];
+		} else {
+			newSelected = [place[0], place[1]];
+		}
 
-	if(newSelected[0] == selected[0] && newSelected[1] == selected[1]) {
-	    selected = [];
-	    newSelected = [];
+		if(newSelected[0] == selected[0] && newSelected[1] == selected[1]) {
+			selected = [];
+			newSelected = [];
+		}
+    } else {
+
+		// Add move verification here
+
+		if(selected.length != 0) {
+			places[place[0]][place[1]] = places[selected[0]][selected[1]];
+			places[selected[0]][selected[1]] = "";
+			selected = [];
+			newSelected = [];
+			if(turn == "white") {
+				turn = "black";
+			} else { turn = "white"}
+		}
 	}
-    }
 }
 
 var board = {
@@ -70,7 +78,7 @@ var board = {
 function startGame() {
     board.start();
     board.canvas.addEventListener("mousedown", function(e) {
-	getCursorPos(board.canvas, e)
+	onBoardClick(board.canvas, e)
     });
 }
 
