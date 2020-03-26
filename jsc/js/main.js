@@ -233,14 +233,14 @@ function checkKing() {
     var blackKing = false;
     var whiteKing = false;
     for(column in places) {
-	for(item in places[column]) {
-	    if(places[column][item] == "wki") {
-		whiteKing = true;
-	    }
-	    if(places[column][item] == "bki") {
-		blackKing = true;
-	    }
-	}
+        for(item in places[column]) {
+            if(places[column][item] == "wki") {
+                whiteKing = true;
+            }
+            if(places[column][item] == "bki") {
+                blackKing = true;
+            }
+        }
     }
 
     if(!blackKing) {
@@ -327,8 +327,64 @@ function getValidMoves(coords) {
 				}
 			}
 			break;
-        case "wki":
-        case "bki":
+        case "wkn":
+        case "bkn":
+            // right up
+            if(coords[0] != 7 && coords[1] < 6) {
+                if(places[coords[0] + 1][coords[1] + 2][0] != turn[0]) {
+					good_moves[i] = [coords[0] + 1, coords[1] + 2];
+					i++;
+                }
+            }
+            // left up
+            if(coords[0] != 0 && coords[1] < 6) {
+                if(places[coords[0] - 1][coords[1] + 2][0] != turn[0]) {
+					good_moves[i] = [coords[0] - 1, coords[1] + 2];
+					i++;
+                }
+            }
+            // right down
+            if(coords[0] != 7 && coords[1] > 1) {
+                if(places[coords[0] + 1][coords[1] - 2][0] != turn[0]) {
+					good_moves[i] = [coords[0] + 1, coords[1] - 2];
+					i++;
+                }
+            }
+            // left down
+            if(coords[0] != 0 && coords[1] > 1) {
+                if(places[coords[0] - 1][coords[1] - 2][0] != turn[0]) {
+					good_moves[i] = [coords[0] - 1, coords[1] - 2];
+					i++;
+                }
+            }
+            // right up (side)
+            if(coords[0] < 6 && coords[1] != 7) {
+                if(places[coords[0] + 2][coords[1] + 1][0] != turn[0]) {
+					good_moves[i] = [coords[0] + 2, coords[1] + 1];
+					i++;
+                }
+            }
+            // left up (side)
+            if(coords[0] > 1 && coords[1] != 7) {
+                if(places[coords[0] - 2][coords[1] + 1][0] != turn[0]) {
+					good_moves[i] = [coords[0] - 2, coords[1] + 1];
+					i++;
+                }
+            }
+            // right down (side)
+            if(coords[0] < 6 && coords[1] != 0) {
+                if(places[coords[0] + 2][coords[1] - 1][0] != turn[0]) {
+					good_moves[i] = [coords[0] + 2, coords[1] - 1];
+					i++;
+                }
+            }
+            // left down (side)
+            if(coords[0] > 1 && coords[1] != 0) {
+                if(places[coords[0] - 2][coords[1] - 1][0] != turn[0]) {
+					good_moves[i] = [coords[0] - 2, coords[1] - 1];
+					i++;
+                }
+            }
             break;
 		default:
 			break;
