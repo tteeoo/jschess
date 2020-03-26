@@ -21,17 +21,16 @@ function onBoardClick(canvas, event) {
 			newSelected = [];
 		}
     } else {
-
-		// Add move verification here
-
 		if(selected.length != 0) {
-			places[place[0]][place[1]] = places[selected[0]][selected[1]];
-			places[selected[0]][selected[1]] = "";
-			selected = [];
-			newSelected = [];
-			if(turn == "white") {
-				turn = "black";
-			} else { turn = "white"}
+			if(isArrayInArray(getValidMoves(selected), place))  {
+				places[place[0]][place[1]] = places[selected[0]][selected[1]];
+				places[selected[0]][selected[1]] = "";
+				selected = [];
+				newSelected = [];
+				if(turn == "white") {
+					turn = "black";
+				} else { turn = "white"}
+			}
 		}
 	}
 }
@@ -196,12 +195,25 @@ function updateSelection() {
     var ctx = board.context;
     ctx.fillStyle = "#98F5FF";
     for(const i of Array(64).keys()) {
-	for(const j of Array(8).keys()) {
-	    if(j == 7 - selected[1] && i == selected[0]) {
-		ctx.fillRect(i * 64, j * 64, 64, 64);
-	    }
+		for(const j of Array(8).keys()) {
+			if(j == 7 - selected[1] && i == selected[0]) {
+				ctx.fillRect(i * 64, j * 64, 64, 64);
+			}
+		}
 	}
-    }
+	if(selected.length != 0) {
+		var moves = getValidMoves(selected);
+		for(var x = 0; x < moves.length; x++) {
+			console.log(x)
+			for(const i of Array(64).keys()) {
+				for(const j of Array(8).keys()) {
+					if(j == 7 - moves[x][1] && i == moves[x][0]) {
+						ctx.fillRect(i * 64, j * 64, 64, 64);
+					}
+				}
+			}
+		}
+	}
 }
 
 function checkKing() {
@@ -228,12 +240,27 @@ function checkKing() {
     }
 }
 
-// make
-function calculateGoodMoves(name, x, y) {
-    var good_moves = [];
-    
-    switch(name) {
-    }
+function isArrayInArray(arr, item) {
+	var item_as_string = JSON.stringify(item);
+  
+	var contains = arr.some(function(ele){
+	  return JSON.stringify(ele) === item_as_string;
+	});
+	return contains;
+}
+
+function getValidMoves(coords) {
+	var piece = places[coords[0]][coords[1]];
+	var good_moves = [];
+    switch(piece) {
+		case "wpa":
+			good_moves[0] = [coords[0], coords[1] + 1]
+			break;
+		default:
+			break;
+	}
+	
+	return good_moves;
 }
 
 var turn = "white";
