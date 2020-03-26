@@ -270,14 +270,14 @@ function getValidMoves(coords) {
 			}
 			// right up
 			if(coords[0] != 7 && coords[1] != 7) {
-				if(places[coords[0] + 1][coords[1] + 1] != "") {
+				if(places[coords[0] + 1][coords[1] + 1][0] == "b") {
 					good_moves[i] = [coords[0] + 1, coords[1] + 1];
 					i++;
 				}
 			}
 			// left up
 			if(coords[0] != 0 && coords[1] != 7) {
-				if(places[coords[0] - 1][coords[1] + 1] != "") {
+				if(places[coords[0] - 1][coords[1] + 1][0] == "b") {
 					good_moves[i] = [coords[0] - 1, coords[1] + 1];
 					i++;
 				}
@@ -300,14 +300,14 @@ function getValidMoves(coords) {
 			}
 			// down right
 			if(coords[0] != 7 && coords[1] != 0) {
-				if(places[coords[0] + 1][coords[1] - 1] != "") {
+				if(places[coords[0] + 1][coords[1] - 1][0] == "w") {
 					good_moves[i] = [coords[0] + 1, coords[1] - 1];
 					i++;
 				}
 			}
 			// down left
 			if(coords[0] != 0 && coords[1] != 0) {
-				if(places[coords[0] - 1][coords[1] - 1] != "" && coords[1] + 1 < 8) {
+				if(places[coords[0] - 1][coords[1] - 1][0] == "w") {
 					good_moves[i] = [coords[0] - 1, coords[1] - 1];
 					i++;
 				}
