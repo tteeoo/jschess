@@ -77,6 +77,7 @@ function startGame() {
 function updateBoard() {
     checkKing();
     updateTurn();
+    pawnPromote();
     pieces = materialize(places);
     board.draw();
     updateSelection();
@@ -215,6 +216,19 @@ function updateSelection() {
 	}
 }
 
+function pawnPromote() {
+    for(var i = 0; i < places.length; i++) {
+        for(var j = 0; j < places[i].length; j++) {
+            if(places[i][j] == "wpa" && j == 7) {
+                places[i][j] = "wqu";
+            }
+            if(places[i][j] == "bpa" && j == 0) {
+                places[i][j] = "bqu";
+            }
+        }
+    }
+}
+
 function checkKing() {
     var blackKing = false;
     var whiteKing = false;
@@ -256,7 +270,7 @@ function getValidMoves(coords) {
 		case "wpa":
 			// first up
 			if(coords[1] == 1) {
-				if(places[coords[0]][coords[1] + 1 ] == "") {
+				if(places[coords[0]][coords[1] + 1 ] == "" && places[coords[0]][coords[1] + 2 ] == "") {
 					good_moves[i] = [coords[0], coords[1] + 2];
 					i++;
 				}
@@ -286,7 +300,7 @@ function getValidMoves(coords) {
 		case "bpa":
 			// first down
 			if(coords[1] == 6) {
-				if(places[coords[0]][coords[1] - 1 ] == "") {
+				if(places[coords[0]][coords[1] - 1 ] == "" && places[coords[0]][coords[1] - 2 ] == "") {
 					good_moves[i] = [coords[0], coords[1] - 2];
 					i++;
 				}
@@ -313,6 +327,9 @@ function getValidMoves(coords) {
 				}
 			}
 			break;
+        case "wki":
+        case "bki":
+            break;
 		default:
 			break;
 	}
