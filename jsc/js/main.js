@@ -204,7 +204,6 @@ function updateSelection() {
 	if(selected.length != 0) {
 		var moves = getValidMoves(selected);
 		for(var x = 0; x < moves.length; x++) {
-			console.log(x)
 			for(const i of Array(64).keys()) {
 				for(const j of Array(8).keys()) {
 					if(j == 7 - moves[x][1] && i == moves[x][0]) {
@@ -252,9 +251,63 @@ function isArrayInArray(arr, item) {
 function getValidMoves(coords) {
 	var piece = places[coords[0]][coords[1]];
 	var good_moves = [];
+	var i = 0;
     switch(piece) {
 		case "wpa":
-			good_moves[0] = [coords[0], coords[1] + 1]
+			// first up
+			if(coords[1] == 1) {
+				good_moves[i] = [coords[0], coords[1] + 2];
+				i++;
+			}
+			// up
+			if(coords[1] != 7) {
+				if(places[coords[0]][coords[1] + 1] == "") {
+					good_moves[i] = [coords[0], coords[1] + 1];
+					i++;
+				}
+			}
+			// right up
+			if(coords[0] != 7 && coords[1] != 7) {
+				if(places[coords[0] + 1][coords[1] + 1] != "") {
+					good_moves[i] = [coords[0] + 1, coords[1] + 1];
+					i++;
+				}
+			}
+			// left up
+			if(coords[0] != 0 && coords[1] != 7) {
+				if(places[coords[0] - 1][coords[1] + 1] != "") {
+					good_moves[i] = [coords[0] - 1, coords[1] + 1];
+					i++;
+				}
+			}
+			break;
+		case "bpa":
+			// first down
+			if(coords[1] == 6) {
+				good_moves[i] = [coords[0], coords[1] - 2];
+				i++;
+			}
+			// down
+			if(coords[1] != 0) {
+				if(places[coords[0]][coords[1] - 1] == "") {
+					good_moves[i] = [coords[0], coords[1] - 1];
+					i++;
+				}
+			}
+			// down right
+			if(coords[0] != 7 && coords[1] != 0) {
+				if(places[coords[0] + 1][coords[1] - 1] != "") {
+					good_moves[i] = [coords[0] + 1, coords[1] - 1];
+					i++;
+				}
+			}
+			// down left
+			if(coords[0] != 0 && coords[1] != 0) {
+				if(places[coords[0] - 1][coords[1] - 1] != "" && coords[1] + 1 < 8) {
+					good_moves[i] = [coords[0] - 1, coords[1] - 1];
+					i++;
+				}
+			}
 			break;
 		default:
 			break;
