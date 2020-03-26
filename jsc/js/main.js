@@ -43,7 +43,7 @@ var board = {
 	this.canvas.id = "main";
 	this.context = this.canvas.getContext("2d");
 	document.getElementById("chess").appendChild(this.canvas);
-	this.interval = setInterval(updateBoard, 20);
+	this.interval = setInterval(updateBoard, 100);
     },
     draw: function() {
 	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -203,16 +203,18 @@ function updateSelection() {
 		}
 	}
 	if(selected.length != 0) {
-		var moves = getValidMoves(selected);
-		for(var x = 0; x < moves.length; x++) {
-			for(const i of Array(64).keys()) {
-				for(const j of Array(8).keys()) {
-					if(j == 7 - moves[x][1] && i == moves[x][0]) {
-						ctx.fillRect(i * 64, j * 64, 64, 64);
-					}
-				}
-			}
-		}
+        var moves = getValidMoves(selected);
+        if(moves.length > 0) {
+            for(var x = 0; x < moves.length; x++) {
+                for(const i of Array(64).keys()) {
+                    for(const j of Array(8).keys()) {
+                        if(j == 7 - moves[x][1] && i == moves[x][0]) {
+                            ctx.fillRect(i * 64, j * 64, 64, 64);
+                        }
+                    }
+                }
+            }
+        }
 	}
 }
 
@@ -386,6 +388,68 @@ function getValidMoves(coords) {
                 }
             }
             break;
+        case "wro":
+        case "bro":
+            // up
+            for(var j = 0; j < 8; j++) {
+                if(j > coords[1]) {
+                    if(places[coords[0]][j] == "") {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                    } else if(places[coords[0]][j][0] != turn[0]) {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // down
+            for(var j = 7; j >= 0; j -= 1) {
+                if(j < coords[1]) {
+                    if(places[coords[0]][j] == "") {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                    } else if(places[coords[0]][j][0] != turn[0]) {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // right
+            for(var j = 0; j < 8; j++) {
+                if(j > coords[0]) {
+                    if(places[j][coords[1]] == "") {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                    } else if(places[j][coords[1]][0] != turn[0]) {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // left
+            for(var j = 7; j >= 0; j -= 1) {
+                if(j < coords[0]) {
+                    if(places[j][coords[1]] == "") {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                    } else if(places[j][coords[1]][0] != turn[0]) {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
 		default:
 			break;
 	}
