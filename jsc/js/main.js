@@ -256,8 +256,10 @@ function getValidMoves(coords) {
 		case "wpa":
 			// first up
 			if(coords[1] == 1) {
-				good_moves[i] = [coords[0], coords[1] + 2];
-				i++;
+				if(places[coords[0]][coords[1] + 1 ] == "") {
+					good_moves[i] = [coords[0], coords[1] + 2];
+					i++;
+				}
 			}
 			// up
 			if(coords[1] != 7) {
@@ -284,8 +286,10 @@ function getValidMoves(coords) {
 		case "bpa":
 			// first down
 			if(coords[1] == 6) {
-				good_moves[i] = [coords[0], coords[1] - 2];
-				i++;
+				if(places[coords[0]][coords[1] - 1 ] == "") {
+					good_moves[i] = [coords[0], coords[1] - 2];
+					i++;
+				}
 			}
 			// down
 			if(coords[1] != 0) {
