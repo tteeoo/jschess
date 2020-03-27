@@ -246,12 +246,14 @@ function checkKing() {
     }
 
     if(!blackKing) {
-	alert("Checkmate! White has won.");
-	location.reload();
+        clearInterval(board.interval);
+        alert("Checkmate! White has won.");
+        location.reload();
     }
     if(!whiteKing) {
-	alert("Checkmate! Black has won.");
-	location.reload();
+        clearInterval(board.interval);
+        alert("Checkmate! Black has won.");
+        location.reload();
     }
 }
 
@@ -450,6 +452,40 @@ function getValidMoves(coords) {
                     }
                 }
             }
+        case "wbi":
+        case "bbi":
+            break;
+        case "wki":
+        case "bki":
+            // up
+            if(coords[1] != 7) {
+                if(places[coords[0]][coords[1] + 1][0] != turn[0]) {
+                    good_moves[i] = [coords[0], coords[1] + 1];
+                    i++;
+                }
+            }
+            // down
+            if(coords[1] != 0) {
+                if(places[coords[0]][coords[1] - 1][0] != turn[0]) {
+                    good_moves[i] = [coords[0], coords[1] - 1];
+                    i++;
+                }
+            }
+            // right
+            if(coords[0] != 7) {
+                if(places[coords[0] + 1][coords[1]][0] != turn[0]) {
+                    good_moves[i] = [coords[0] + 1, coords[1]];
+                    i++;
+                }
+            }
+            // up
+            if(coords[0] != 0) {
+                if(places[coords[0] - 1][coords[1]][0] != turn[0]) {
+                    good_moves[i] = [coords[0] - 1, coords[1]];
+                    i++;
+                }
+            }
+            break;
 		default:
 			break;
 	}
