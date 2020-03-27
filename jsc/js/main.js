@@ -452,6 +452,7 @@ function getValidMoves(coords) {
                     }
                 }
             }
+            break;
         case "wbi":
         case "bbi":
             // up right
