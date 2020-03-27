@@ -661,10 +661,38 @@ function getValidMoves(coords) {
                     i++;
                 }
             }
-            // up
+            // left
             if(coords[0] != 0) {
                 if(places[coords[0] - 1][coords[1]][0] != turn[0]) {
                     good_moves[i] = [coords[0] - 1, coords[1]];
+                    i++;
+                }
+            }
+            // up right
+            if(coords[1] != 7 && coords[0] != 7) {
+                if(places[coords[0] + 1][coords[1] + 1][0] != turn[0]) {
+                    good_moves[i] = [coords[0] + 1, coords[1] + 1];
+                    i++;
+                }
+            }
+            // down right
+            if(coords[1] != 0 && coords[0] != 7) {
+                if(places[coords[0] + 1][coords[1] - 1][0] != turn[0]) {
+                    good_moves[i] = [coords[0] + 1, coords[1] - 1];
+                    i++;
+                }
+            }
+            // up left
+            if(coords[0] != 0 && coords[1] != 7) {
+                if(places[coords[0] - 1][coords[1] + 1][0] != turn[0]) {
+                    good_moves[i] = [coords[0] - 1, coords[1] + 1];
+                    i++;
+                }
+            }
+            // down left
+            if(coords[0] != 0 && coords[1] != 0) {
+                if(places[coords[0] - 1][coords[1] - 1][0] != turn[0]) {
+                    good_moves[i] = [coords[0] - 1, coords[1] - 1];
                     i++;
                 }
             }
