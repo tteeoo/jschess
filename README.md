@@ -1,7 +1,7 @@
 # jschess
 Chess in javascript
 
-#### Play at: ![chess.theohenson.com](https://chess.theohenson.com/)
+### Play at: <a href="https://chess.theohenson.com/">chess.theohenson.com</a>
 
 #### This is almost done, I just need to add a few more features:
 
