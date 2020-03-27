@@ -454,6 +454,189 @@ function getValidMoves(coords) {
             }
         case "wbi":
         case "bbi":
+            // up right
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] + j < 8 && coords[1] + j < 8) {
+                    if(places[coords[0] + j][coords[1] + j] == "") {
+                        good_moves[i] = [coords[0] + j, coords[1] + j];
+                        i++;
+                    } else if(places[coords[0] + j][coords[1] + j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] + j, coords[1] + j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // up left
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] - j > -1 && coords[1] + j < 8) {
+                    if(places[coords[0] - j][coords[1] + j] == "") {
+                        good_moves[i] = [coords[0] - j, coords[1] + j];
+                        i++;
+                    } else if(places[coords[0] - j][coords[1] + j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] - j, coords[1] + j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // down right
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] + j < 8 && coords[1] - j > -1) {
+                    if(places[coords[0] + j][coords[1] - j] == "") {
+                        good_moves[i] = [coords[0] + j, coords[1] - j];
+                        i++;
+                    } else if(places[coords[0] + j][coords[1] - j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] + j, coords[1] - j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // down left
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] - j > -1 && coords[1] - j > -1) {
+                    if(places[coords[0] - j][coords[1] - j] == "") {
+                        good_moves[i] = [coords[0] - j, coords[1] - j];
+                        i++;
+                    } else if(places[coords[0] - j][coords[1] - j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] - j, coords[1] - j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            break;
+        case "wqu":
+        case "bqu":
+            // up right
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] + j < 8 && coords[1] + j < 8) {
+                    if(places[coords[0] + j][coords[1] + j] == "") {
+                        good_moves[i] = [coords[0] + j, coords[1] + j];
+                        i++;
+                    } else if(places[coords[0] + j][coords[1] + j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] + j, coords[1] + j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // up left
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] - j > -1 && coords[1] + j < 8) {
+                    if(places[coords[0] - j][coords[1] + j] == "") {
+                        good_moves[i] = [coords[0] - j, coords[1] + j];
+                        i++;
+                    } else if(places[coords[0] - j][coords[1] + j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] - j, coords[1] + j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // down right
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] + j < 8 && coords[1] - j > -1) {
+                    if(places[coords[0] + j][coords[1] - j] == "") {
+                        good_moves[i] = [coords[0] + j, coords[1] - j];
+                        i++;
+                    } else if(places[coords[0] + j][coords[1] - j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] + j, coords[1] - j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // down left
+            for(var j = 1; j < 9; j++) {
+                if(coords[0] - j > -1 && coords[1] - j > -1) {
+                    if(places[coords[0] - j][coords[1] - j] == "") {
+                        good_moves[i] = [coords[0] - j, coords[1] - j];
+                        i++;
+                    } else if(places[coords[0] - j][coords[1] - j][0] != turn[0]) {
+                        good_moves[i] = [coords[0] - j, coords[1] - j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // up
+            for(var j = 0; j < 8; j++) {
+                if(j > coords[1]) {
+                    if(places[coords[0]][j] == "") {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                    } else if(places[coords[0]][j][0] != turn[0]) {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // down
+            for(var j = 7; j >= 0; j -= 1) {
+                if(j < coords[1]) {
+                    if(places[coords[0]][j] == "") {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                    } else if(places[coords[0]][j][0] != turn[0]) {
+                        good_moves[i] = [coords[0], j];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // right
+            for(var j = 0; j < 8; j++) {
+                if(j > coords[0]) {
+                    if(places[j][coords[1]] == "") {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                    } else if(places[j][coords[1]][0] != turn[0]) {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            // left
+            for(var j = 7; j >= 0; j -= 1) {
+                if(j < coords[0]) {
+                    if(places[j][coords[1]] == "") {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                    } else if(places[j][coords[1]][0] != turn[0]) {
+                        good_moves[i] = [j, coords[1]];
+                        i++;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
             break;
         case "wki":
         case "bki":
