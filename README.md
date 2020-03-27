@@ -1,6 +1,8 @@
 # jschess
 Chess in javascript
 
+#### Play at: ![chess.theohenson.com](https://chess.theohenson.com/)
+
 #### This is almost done, I just need to add a few more features:
 
 - En passant
